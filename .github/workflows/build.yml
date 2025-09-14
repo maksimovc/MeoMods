@@ -23,13 +23,32 @@ jobs:
         shell: pwsh
         run: |
           Set-Location ${{ github.workspace }}
-          if (-Not (Test-Path tools\gradle)) {
+          $toolsDir = Join-Path ${{ github.workspace }} 'tools'
+          $gradleDir = Join-Path $toolsDir 'gradle'
+          if (-Not (Test-Path $gradleDir)) {
             Write-Host "tools\gradle not found — downloading Gradle 4.9"
             $zip = "gradle-4.9-bin.zip"
-            Invoke-WebRequest -Uri 'https://services.gradle.org/distributions/gradle-4.9-bin.zip' -OutFile $zip
-            Expand-Archive -LiteralPath $zip -DestinationPath tools
-            Move-Item -Path tools\gradle-4.9 -Destination tools\gradle
-            Remove-Item $zip -Force
+            try {
+              Invoke-WebRequest -Uri 'https://services.gradle.org/distributions/gradle-4.9-bin.zip' -OutFile $zip -UseBasicParsing -ErrorAction Stop
+              Expand-Archive -LiteralPath $zip -DestinationPath $toolsDir -Force
+              $extracted = Join-Path $toolsDir 'gradle-4.9'
+              if (Test-Path $extracted) {
+                if (Test-Path $gradleDir) {
+                  Write-Host "Destination $gradleDir appeared during extraction; removing extracted folder"
+                  Remove-Item -Recurse -Force $extracted
+                } else {
+                  Move-Item -Path $extracted -Destination $gradleDir -ErrorAction Stop
+                }
+              } else {
+                Write-Host "Warning: expected extracted folder $extracted not found"
+              }
+            } catch {
+              Write-Host "Failed to download or extract Gradle: $($_.Exception.Message)" -ForegroundColor Yellow
+              if (Test-Path $zip) { Remove-Item $zip -Force }
+              throw
+            } finally {
+              if (Test-Path $zip) { Remove-Item $zip -Force }
+            }
           } else {
             Write-Host "tools\gradle already exists — skipping download"
           }
