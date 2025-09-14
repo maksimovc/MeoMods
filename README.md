@@ -76,201 +76,92 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\list-releases.ps1 
 Робота з MDK wrapper
 - Якщо хочеш використовувати gradle wrapper з MDK (наприклад для локального MDK-проєкту), запускай wrapper у папці MDK:
 
-```powershell
-& "${PWD}\mdks\1.12.2\forge-1.12.2-mdk-test\gradlew.bat" build
-```
+## MeoMods — робочий простір та інструкція (укр.)
 
-Але зверни увагу: wrapper може використовувати іншу версію Gradle. Якщо FG3 конфліктує з версією Gradle, краще використовувати локальний Gradle 4.9 (в `tools/gradle`).
+Цей файл об'єднує інформацію про використання, розробку та релізи — він замінює старі `docs/USAGE_UA.md`, `DEV_README.md` та `RELEASE_INSTRUCTIONS.md`.
 
-Як додати нову версію Minecraft/MDK
-1. Створи каталоги `mods/<new-version>/` і `mdks/<new-version>/`.
-2. Розпакуй Forge MDK у `mdks/<new-version>/forge-<new-version>-mdk-test`.
-3. Додай свої модулі у `mods/<new-version>/` (або скопіюй і адаптуй існуючі модулі з `mods/1.12.2`).
-4. Якщо потрібно, додай нові include у `settings.gradle` або запускай `build-all.ps1 -Version <new-version>` — скрипт намагається підібрати MDK у `mdks/<version>`.
+У змісті: швидкий старт, структура репозиторію, інструкції для розробника, збірка, релізи та усунення проблем.
 
-Перелік корисних скриптів
-- `scripts/build-all.ps1` — головний скрипт для збірки всіх модів (має параметри `-Version`, `-Local`, `-Clean`).
-- `scripts/collect-jars.ps1` — копіює JAR з `build/libs` у `releases/` з timestamp.
-- `scripts/list-releases.ps1` — новий: виводить JAR-і в `releases/` з SHA256; приймає `-Version` для фільтра.
+---
 
-VS Code
-- В `.vscode/tasks.json` є таски:
-    - `Build: All Mods` — запускає `build-all.ps1 -Version 1.12.2` (wrapper/default behavior).
-    - `Build: All Mods (Local Gradle)` — запускає `build-all.ps1 -Local -Version 1.12.2` (використовує `tools/gradle`).
-    - `Gradle: Build MDK (Wrapper)` — таск з input `version` для запуску wrapper у `mdks/<version>`.
+### Швидкий старт
 
-Типові помилки та як їх вирішувати
+1) Переконайся, що встановлено JDK 8 (java -version має повертати Java 8).
 
-1) "Found Gradle version X.X.X ... not supported in FG3"
-     - Причина: ForgeGradle (FG3) має обмежену сумісність з Gradle; якщо runner використовує занадто нову версію Gradle — build впаде.
-     - Рішення:
-         - Використовуй локальний Gradle 4.9 (в `tools/gradle`) і запусти скрипт з `-Local`:
+2) Збери всі моди локально (використовуємо локальний Gradle з `tools/gradle`):
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-all.ps1 -Local -Version 1.12.2
 ```
 
-         - Або відредагуй `gradle-wrapper.properties` у MDK, щоб вказати сумісну версію (якщо розумієш наслідки).
-
-2) "Project with path ':1.12.2:Permissions' could not be found"
-     - Причина: Gradle не знаходить підпроєкт з таким шляхом — невірні include-и у `settings.gradle` або неправильний `projectDir`.
-     - Рішення:
-         - Відкрий `settings.gradle` у корені репозиторію і переконайся, що є рядок `include ':1.12.2:Permissions'` і що `project(':1.12.2:Permissions').projectDir` вказує на `mods/1.12.2/Permissions`.
-         - Якщо запускаєш MDK wrapper зі всередини `mdks/<version>/forge-...`, переконайся, що MDK `settings.gradle` реєструє ті самі повні project paths або запускай збірку з кореню (рекомендовано для мульти-модульних збірок).
-
-3) "java.lang.UnsupportedClassVersionError" або інші JVM-помилки
-     - Причина: Невідповідність версії Java (наприклад, збірка під Java 8, але на машині встановлено Java 11 або навпаки).
-     - Рішення:
-         - Переконайся, що `java -version` повертає Java 8 під час збірки. На CI вкажи JDK8 (Temurin/AdoptOpenJDK).
-         - Можеш встановити `org.gradle.java.home` в `gradle.properties` для вказання JDK, який Gradle повинен використовувати.
-
-4) Помилки компіляції (cannot find symbol, missing method тощо)
-     - Причина: Невідповідні імпорти, відсутні методи, або неправильні залежності між локальними підпроєктами.
-     - Рішення:
-         - Переглянь повідомлення компілятора (Gradle виводить файл і рядок). Виправ код у `mods/<version>/<mod>/src/main/java/...`.
-         - Якщо мод залежить від іншого локального моду, переконайся, що в `build.gradle` використовується повний шлях `compile project(':1.12.2:Permissions')` або еквівалент.
-
-5) Проблеми з MDK/mappings або першим запуском (завантаження залежностей)
-     - Причина: MDK підвантажує MCP mappings і Forge залежності під час першого build — це може зайняти час або вимагати інтернету.
-     - Рішення:
-         - Переконайся, що в тебе є інтернет під час першого build, або налаштуй локальний кеш/проксі.
-
-Діагностика (корисні параметри)
-- Додай `--stacktrace`/`--info` до Gradle команди щоб отримати повніший трейс:
+3) Зібрати та зібрати релізні JAR у папку `releases/`:
 
 ```powershell
-& "tools\gradle\bin\gradle.bat" build --no-daemon --stacktrace --info
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\collect-jars.ps1 -Version 1.12.2
 ```
 
-- Якщо хочеш пропустити тести при відлагодженні: `gradle build -x test`.
-- Для швидкого пошуку проблема в коді: зверни увагу на першу помилку у виводі Gradle — вона зазвичай є коренем проблеми.
+4) Згенерувати JSON-манифест релізів (SHA256):
 
-Приклад конкретного відлагодження
-- Помилка: `cannot find symbol PermissionsAPI` у `ChunkGuard` → перевір:
-    1) чи `mods/1.12.2/Permissions` включений у `settings.gradle`;
-    2) чи у `ChunkGuard` додано `import com.systmeo.permissions.PermissionsAPI;`;
-    3) чи `build.gradle` у `ChunkGuard` має `compile project(':1.12.2:Permissions')`.
-
-
-Контрибуція та стиль
-- Коли додаєш мод — додай `mcmod.info` (якщо потрібно), README в папці моду з інструкціями, та онови `settings.gradle` (root) для включення нового моду.
-- Дотримуйся Java 8 (sourceCompatibility / targetCompatibility у `build.gradle` кожного моду).
-
-Що зроблено у цьому репозиторії (коротко)
-- Реструктуризація workspace у multi-version layout.
-- Скрипти для збірки/збору релізів з підтримкою `-Version`.
-- Локальна Gradle інсталяція для сумісності з FG3 (4.9).
-- Автоматична збірка і збір JAR для `mods/1.12.2` пройдена та JAR скопійовані у `releases/`.
-
-Далі — дорожня карта (детально дивись roadmap у корені або запроси її у цьому репо).
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\list-releases.ps1 -Version 1.12.2 -OutFormat json
+```
 
 ---
+
+### Структура репозиторію
+
+- `mods/<version>/` — кожний мод як окремий Gradle-проєкт.
+- `mdks/<version>/forge-<version>-mdk-test/` — тестовий MDK для локального відлагодження.
+- `tools/gradle/` — локальний Gradle (4.9) для сумісності з ForgeGradle 3.x.
+- `releases/` — скопійовані JAR з timestamp.
+- `scripts/` — PowerShell-скрипти: `build-all.ps1`, `collect-jars.ps1`, `list-releases.ps1`.
+
+---
+
+### CI (GitHub Actions)
+
+- Workflow: `.github/workflows/build.yml` — будує з JDK 8 та локальним Gradle 4.9, збирає JAR, генерує JSON-манифест і завантажує `releases/` як артефакт.
+- Виправлено помилку: скрипт тепер перевіряє, чи існує `tools/gradle` і не перезаписує його (помилка на раннері викликала аварію при існуючому каталозі).
+
+Що дивитись у разі проблем: Actions → виберіть job `build-windows` → дивіться кроки "Ensure Gradle 4.9", "Run build script (Local Gradle)".
+
+---
+
+### Скрипти (коротко)
+
+- `scripts/build-all.ps1` — будує всі підпроєкти; опції: `-Version <ver>`, `-Local` (використовує `tools/gradle`), `-Clean`.
+- `scripts/collect-jars.ps1` — збирає JAR у `releases/` з timestamp.
+- `scripts/list-releases.ps1` — виводить SHA256 та може згенерувати JSON/CSV manifest (-OutFormat json|csv).
+
+---
+
+### Типові проблеми та рішення (швидко)
+
+- "tools\gradle already exists" при CI: виправлено у workflow — тепер перевірка `Test-Path` перед завантаженням.
+- "Found Gradle version ... not supported in FG3": використайте `-Local` з Gradle 4.9 або змініть `gradle-wrapper.properties` у MDK.
+- "Project with path ':1.12.2:Permissions' could not be found": перевірте `settings.gradle` — include і projectDir повинні вказувати на `mods/1.12.2/<Module>`.
+- JVM помилки: використовуйте JDK 8 на CI та локально.
+
+---
+
+### Рекомендації по git
+
+- Додайте `.gitignore` щоб уникнути пушу великих бінарів:
+
+```
+.gradle/
+**/build/
+releases/
+.idea/
+.vscode/
+*.iml
+```
+
+---
+
+Якщо потрібно — я можу додати окремі секції (наприклад: CONTRIBUTING, CHANGELOG template), або зробити англомовну версію.
+
 README оновлено: 2025-09-14
-### ПРОЄКТ: [MEO] - Технічний Опис
-
-## 1. ЗАГАЛЬНА КОНЦЕПЦІЯ
-
-**Назва Проєкту:** [MEO]
-
-**Головна Мета:** Створити серію високоякісних, самодостатніх та взаємопов'язаних модів для Minecraft Forge 1.12.2, які повністю замінюють функціонал популярних плагінів Bukkit/Spigot. Проєкт орієнтований на українську та міжнародну спільноти, з акцентом на продуктивність, гнучкість та зручність у використанні.
-
-**Основні Принципи:**
-- **Нативність:** Усі моди розробляються виключно на Forge API, без залежностей від гібридних ядер (Mohist, Magma тощо).
-- **Модульність та API:** Кожен мод є самодостатнім, але надає чистий та стабільний API для взаємодії з іншими модами серії [MEO].
-- **Продуктивність:** Архітектура модів передбачає кешування та оптимізовані алгоритми для мінімального впливу на продуктивність сервера.
-- **Локалізація:** Повна підтримка багатомовності через стандартні файли `.lang`.
-- **Зручність:** Наявність як потужних консольних команд, так і інтуїтивно зрозумілих графічних інтерфейсів (GUI) для адміністрування.
-- **Відкритість:** Код добре задокументований (Javadoc) та готовий до публікації на платформах, як-от GitHub.
-
----
-
-## 2. ЗАВЕРШЕНІ МОДИ
-
-### 2.1. Permissions [MEO]
-
-**Версія:** `1.0.0-1.12.2`
-**Призначення:** Повноцінна заміна LuckPerms. Потужна система управління правами доступу.
-
-**Ключові Особливості:**
-- Управління правами для гравців та груп.
-- Спадкування прав від батьківських груп.
-- Тимчасові права та тимчасове членство у групах (напр., `1d`, `12h`).
-- Префікси, суфікси та вага груп для налаштування чату.
-- Система рангів (Треки) для легкого підвищення гравців.
-- Високопродуктивна система кешування для миттєвої перевірки прав.
-- Повноцінний графічний інтерфейс (`/perms gui`) для управління всіма аспектами.
-- Зберігання даних у `config/permissions/` у файлах `users.json`, `groups.json`, `tracks.json`.
-- Повна локалізація (13 мов).
-
-**Архітектура:**
-- **`Permissions.java`:** Головний клас. Ініціалізує менеджери, команди, GUI та мережевий канал.
-- **`PermissionManager.java`:** "Мозок" моду. Обробляє логіку перевірки прав, наслідування, кешування та управління даними в пам'яті.
-- **`DataManager.java`:** Відповідає за збереження та завантаження даних у JSON-файли.
-- **Класи в `data/`:** `User`, `Group`, `Track`, `PermissionNode`, `GroupNode` - моделі даних, що описують сутності.
-- **`PermissionsAPI.java`:** Публічний, стабільний API для інших модів.
-- **Класи в `commands/`:** Розгалужена, локалізована система команд.
-- **Класи в `gui/`:** Багатоекранний, інтерактивний GUI для адміністрування.
-- **Класи в `network/`:** Система пакетів для синхронізації даних між сервером та клієнтським GUI.
-
-**Команди:** `/perms` (аліаси: `/p`)
-- `/perms user <гравець> <info|permission|parent|promote> ...`
-- `/perms group <група> <info|permission|parent|create|delete|setprefix|setsuffix|setweight> ...`
-- `/perms track <трек> <create|delete|append> ...`
-- `/perms check <гравець> <право>`
-- `/perms gui`
-
-**API для розробників (`com.systmeo.permissions.PermissionsAPI`):**
-'''java
-// Перевірка права
-boolean hasFly = PermissionsAPI.hasPermission(player.getUniqueID(), "essentials.fly");
-
-// Отримання префіксу для чату
-String prefix = PermissionsAPI.getPrefix(player.getUniqueID());
-'''
-
----
-
-### 2.2. Wallet [MEO]
-
-**Версія:** `1.0.0-1.12.2`
-**Призначення:** Заміна Vault/EssentialsEco. Легке та надійне ядро серверної економіки.
-
-**Ключові Особливості:**
-- Серверна економіка з балансами гравців.
-- Налаштування стартового балансу та символу валюти у файлі `wallet.cfg`.
-- Команди для гравців (`/balance`, `/pay`) та адміністраторів (`/eco`).
-- Лідерборд найбагатших гравців (`/baltop`).
-- Зручний графічний інтерфейс (`/wallet gui`) для перегляду балансу, переказів та топу.
-- Чистий API для інтеграції з іншими модами (магазини, аукціони).
-- Зберігання даних у `config/wallet/accounts.json`.
-- Повна локалізація (13 мов).
-
-**Архітектура:**
-- **`Wallet.java`:** Головний клас. Ініціалізує менеджери, конфігурацію, команди, GUI та мережевий канал.
-- **`AccountManager.java`:** Керує балансами гравців у пам'яті.
-- **`DataManager.java`:** Відповідає за збереження та завантаження балансів у JSON-файл.
-- **`WalletConfig.java`:** Обробляє конфігураційний файл `.cfg`.
-- **`WalletAPI.java`:** Публічний, стабільний API для інших модів.
-- **Класи в `commands/`:** Локалізована система команд.
-- **Класи в `gui/`:** Інтерактивний GUI.
-- **Класи в `network/`:** Система пакетів для синхронізації даних з GUI.
-
-**Команди:** `/balance` (аліаси: `/bal`, `/money`), `/eco`, `/wallet`
-- `/balance [гравець]`
-- `/pay <гравець> <сума>`
-- `/baltop`
-- `/eco <give|take|set> <гравець> <сума>`
-- `/wallet reload`
-- `/wallet gui`
-
-**API для розробників (`com.systmeo.wallet.api.WalletAPI`):**
-'''java
-// Перевірка, чи достатньо грошей для покупки
-if (WalletAPI.hasEnough(player.getUniqueID(), 100.50)) {
-    // Зняття коштів
-    boolean success = WalletAPI.withdraw(player.getUniqueID(), 100.50);
-    if (success) {
-        // Видати предмет
     }
 }
 

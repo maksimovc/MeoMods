@@ -20,11 +20,19 @@ jobs:
           java-version: '8'
 
       - name: Ensure Gradle 4.9 (download)
+        shell: pwsh
         run: |
-          mkdir tools\gradle || echo exists
-          powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://services.gradle.org/distributions/gradle-4.9-bin.zip','gradle-4.9.zip')"
-          tar -xf gradle-4.9.zip -C tools
-          move tools\gradle-4.9 tools\gradle
+          Set-Location ${{ github.workspace }}
+          if (-Not (Test-Path tools\gradle)) {
+            Write-Host "tools\gradle not found — downloading Gradle 4.9"
+            $zip = "gradle-4.9-bin.zip"
+            Invoke-WebRequest -Uri 'https://services.gradle.org/distributions/gradle-4.9-bin.zip' -OutFile $zip
+            Expand-Archive -LiteralPath $zip -DestinationPath tools
+            Move-Item -Path tools\gradle-4.9 -Destination tools\gradle
+            Remove-Item $zip -Force
+          } else {
+            Write-Host "tools\gradle already exists — skipping download"
+          }
 
       - name: Run build script (Local Gradle)
         shell: pwsh
