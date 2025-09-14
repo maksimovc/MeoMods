@@ -52,8 +52,42 @@ jobs:
           Set-Location ${{ github.workspace }}
           powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\list-releases.ps1 -Version 1.12.2 -OutFormat json
 
+      - name: Upload manifest as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: meomods-manifest-1.12.2
+          path: releases/manifest-*.json
+          retention-days: 90
+
       - name: Upload releases as artifact
         uses: actions/upload-artifact@v4
         with:
           name: meomods-releases-1.12.2
           path: releases
+          retention-days: 90
+
+      - name: Smoke-test: verify JAR integrity
+        shell: pwsh
+        run: |
+          Set-Location ${{ github.workspace }}
+          $releases = Join-Path ${{ github.workspace }} 'releases'
+          if (-Not (Test-Path $releases)) {
+            Write-Host "No releases directory found at $releases"; exit 1
+          }
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $failed = $false
+          Get-ChildItem -Path $releases -Filter '*.jar' -File | ForEach-Object {
+            try {
+              $zip = [System.IO.Compression.ZipFile]::OpenRead($_.FullName)
+              # quick checks: ensure there is at least one entry and optionally mcmod.info
+              if ($zip.Entries.Count -le 0) { throw "empty jar" }
+              $hasMeta = $zip.Entries | Where-Object { $_.FullName -match 'mcmod.info|pack.mcmeta' }
+              if (-Not $hasMeta) { Write-Host "Warning: no mcmod.info or pack.mcmeta in $($_.Name)" }
+              $zip.Dispose()
+              Write-Host "OK: $($_.Name)"
+            } catch {
+              Write-Host "INVALID JAR: $($_.Name) - $($_.Exception.Message)" -ForegroundColor Red
+              $failed = $true
+            }
+          }
+          if ($failed) { throw "One or more JARs failed integrity check" }
