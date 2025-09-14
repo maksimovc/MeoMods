@@ -1,0 +1,36 @@
+name: MeoRegion
+version: 1.0.0
+main: com.meoworld.meoregion.MeoRegion
+authors: [SystMEO]
+description: Advanced region management plugin.
+api-version: 1.12
+softdepend: [Vault]
+
+commands:
+  rg:
+    description: Main command for MeoRegion plugin.
+    usage: /<command> [subcommand] [args]
+    aliases: [region, regions]
+
+permissions:
+  meoregion.admin:
+    description: Grants full administrative access to MeoRegion.
+    default: op
+  meoregion.user:
+    description: Grants basic access to create and manage own regions.
+    default: true
+  meoregion.user.find:
+    description: Allows user to use the /rg find command.
+    default: true
+  meoregion.admin.claim:
+    description: Allows creating administrative regions.
+    default: op
+  meoregion.admin.tempflag:
+    description: Allows setting temporary flags.
+    default: op
+  meoregion.limit.unlimited:
+    description: Grants unlimited region claims.
+    default: op
+  meoregion.limit.*:
+    description: Permission for specific region limits (e.g., meoregion.limit.10).
+    default: op

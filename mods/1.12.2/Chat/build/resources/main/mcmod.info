@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "chat",
+    "name": "Chat [MEO]",
+    "description": "Розширений чат з каналами та форматуванням на основі PermissionsAPI.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["SystMEO"],
+    "credits": "The Forge and FML teams",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

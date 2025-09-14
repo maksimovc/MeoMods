@@ -1,0 +1,91 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Gradle: Build MDK (Wrapper)",
+            "type": "shell",
+            "command": "${workspaceFolder}\\mdks\\${input:version}\\forge-${input:version}-mdk-test\\gradlew.bat",
+            "args": ["build"],
+            "group": "build",
+            "presentation": { "reveal": "always" }
+        },
+
+        {
+            "label": "Build: All Mods",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-NoProfile","-ExecutionPolicy","Bypass","-File","${workspaceFolder}\\scripts\\build-all.ps1","-Version","1.12.2"],
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "Gradle: Build MDK Test",
+            "type": "shell",
+            "command": "${workspaceFolder}\\mdks\\1.12.2\\forge-1.12.2-mdk-test\\gradlew.bat",
+            "args": ["build"],
+            "group": "build",
+            "presentation": { "reveal": "always" }
+        }
+        ,
+        {
+            "label": "Build: All Mods (Local Gradle)",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-NoProfile","-ExecutionPolicy","Bypass","-File","${workspaceFolder}\\scripts\\build-all.ps1","-Local","-Version","1.12.2"],
+            "group": "build",
+            "presentation": { "reveal": "always" }
+        },
+        {
+            "label": "Collect: Releases",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-NoProfile","-ExecutionPolicy","Bypass","-File","${workspaceFolder}\\scripts\\collect-jars.ps1","-Version","1.12.2"],
+            "presentation": { "reveal": "always" }
+        },
+        {
+            "label": "Clean: MDK Test",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-NoProfile","-ExecutionPolicy","Bypass","-File","${workspaceFolder}\\scripts\\build-all.ps1","-Clean","-Version","1.12.2"],
+            "presentation": { "reveal": "always" }
+        },
+        {
+            "label": "Build: All Mods (1.16.5)",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-NoProfile","-ExecutionPolicy","Bypass","-File","${workspaceFolder}\\scripts\\build-all.ps1","-Version","1.16.5"],
+            "group": "build",
+            "presentation": { "reveal": "always" }
+        },
+        {
+            "label": "Build: All Mods (1.20.1)",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-NoProfile","-ExecutionPolicy","Bypass","-File","${workspaceFolder}\\scripts\\build-all.ps1","-Version","1.20.1"],
+            "group": "build",
+            "presentation": { "reveal": "always" }
+        },
+        {
+            "label": "Build: All Mods (1.7.10)",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-NoProfile","-ExecutionPolicy","Bypass","-File","${workspaceFolder}\\scripts\\build-all.ps1","-Version","1.7.10"],
+            "group": "build",
+            "presentation": { "reveal": "always" }
+        }
+    ]
+
+    ,
+    "inputs": [
+        {
+            "id": "version",
+            "type": "pickString",
+            "description": "Select Minecraft/MDK version",
+            "options": ["1.12.2","1.16.5","1.20.1","1.7.10"],
+            "default": "1.12.2"
+        }
+    ]
+}

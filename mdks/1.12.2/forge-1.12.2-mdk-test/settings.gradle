@@ -1,0 +1,9 @@
+rootProject.name = 'forge-1.12.2-mdk-test'
+
+// Register the test modules as part of the top-level multi-project namespace
+include ':1.12.2:Permissions'
+project(':1.12.2:Permissions').projectDir = file('../../mods/1.12.2/Permissions')
+include ':1.12.2:Wallet'
+project(':1.12.2:Wallet').projectDir = file('../../mods/1.12.2/Wallet')
+include ':1.12.2:ChunkGuard'
+project(':1.12.2:ChunkGuard').projectDir = file('../../mods/1.12.2/ChunkGuard')

@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "cmdpack",
+    "name": "CmdPack [MEO]",
+    "description": "Набір основних команд, аналогічних EssentialsX.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["SystMEO"],
+    "credits": "The Forge and FML teams",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

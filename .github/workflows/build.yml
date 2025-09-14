@@ -1,0 +1,51 @@
+name: Build MeoMods (1.12.2)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+
+      - name: Ensure Gradle 4.9 (download)
+        run: |
+          mkdir tools\gradle || echo exists
+          powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://services.gradle.org/distributions/gradle-4.9-bin.zip','gradle-4.9.zip')"
+          tar -xf gradle-4.9.zip -C tools
+          move tools\gradle-4.9 tools\gradle
+
+      - name: Run build script (Local Gradle)
+        shell: pwsh
+        run: |
+          Set-Location ${{ github.workspace }}
+          powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-all.ps1 -Local -Version 1.12.2
+
+      - name: Collect JARs
+        shell: pwsh
+        run: |
+          Set-Location ${{ github.workspace }}
+          powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\collect-jars.ps1 -Version 1.12.2
+
+      - name: Generate releases manifest (JSON)
+        shell: pwsh
+        run: |
+          Set-Location ${{ github.workspace }}
+          powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\list-releases.ps1 -Version 1.12.2 -OutFormat json
+
+      - name: Upload releases as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: meomods-releases-1.12.2
+          path: releases

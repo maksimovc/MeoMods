@@ -1,0 +1,322 @@
+messages:
+  prefix: "&7[&aMeoRegion&7] "
+  player-only: "&cThis command is for players only."
+  no-permission: "&cYou don't have permission."
+  reload: "&aMeoRegion plugin has been reloaded."
+  economy-disabled: "&cEconomy features are disabled on this server."
+  action-failed: "&cAction failed."
+
+  # Region management
+  region-claimed: "&aRegion '{region}' has been successfully claimed."
+  admin-region-claimed: "&aAdmin region '{region}' with radius {radius} has been created."
+  region-deleted: "&eRegion '{region}' has been deleted."
+  region-renamed: "&eRegion '{old_name}' has been renamed to '{new_name}'."
+  region-already-exists: "&cRegion with name '{region}' already exists."
+  area-already-claimed: "&cThis area or part of it is already claimed."
+  not-in-region: "&cYou are not in any region."
+  not-owner: "&cYou are not the owner of this region."
+  not-owner-or-manager: "&cYou are not the owner or a manager of this region."
+  region-not-found: "&cRegion '{region}' not found."
+  player-not-found: "&cPlayer '{player}' not found."
+  region-limit-reached: "&cYou have reached your region limit. Your limit is: {limit} chunks."
+  merge-not-found: "&cOne or both regions not found."
+  merge-self: "&cCannot merge a region with itself."
+  merge-success: "&aRegions '{region1}' and '{region2}' have been successfully merged."
+
+  # Info & List
+  info:
+    header: "&6--- Region Info: &b{region}&6 ---"
+    owner: "&eOwner: &f{owner}"
+    server-owner: "Server"
+    role-plural: "&e{role}s: &f{players}"
+    priority: "&ePriority: &f{priority}"
+    size-chunks: "&eSize (in chunks): &f{size}"
+    set-flags: "&eSet flags:"
+    flag-format: "&7 - {flag}: &f{value}"
+    status: "&eStatus: "
+    for-sale: "&aSelling for {price}"
+    for-rent: "&bRenting for {price}"
+  list:
+    all-header: "&6--- List of all regions ---"
+    owner-suffix: " &7(Owner: {owner})"
+    no-regions: "&ePlayer {player} has no regions."
+    player-regions: "&ePlayer {player}'s regions: &f{regions}"
+  find-header: "&6--- Nearby Regions ---"
+  find-format: "&b{region} &7(Owner: {owner}, Distance: {distance}m)"
+  find-no-regions: "&cNo regions found within a radius of {radius} blocks."
+
+  # Roles & Permissions
+  role-set-success: "&aSet role for player {player} to '{role}' in region '{region}'."
+  ownership-transferred: "&aOwnership of region '{region}' has been transferred to player {player}."
+  unknown-role: "&cUnknown role. Available: {roles}"
+  cannot-modify-owner-role: "&cCannot change the role of the region owner."
+  cannot-set-higher-role: "&cYou cannot set a role that is higher than or equal to your own."
+
+  # Economy
+  not-enough-money: "&cYou don't have enough money."
+  transaction-failed-withdraw: "&cFailed to withdraw money. The transaction has been cancelled."
+  transaction-failed-internal: "&cAn internal error occurred. The transaction has been safely cancelled and your money has been refunded."
+  region-for-sale: "&aRegion '{region}' is now for sale for {price}."
+  region-not-for-sale: "&eRegion '{region}' is no longer for sale."
+  region-not-for-sale-info: "&cThis region is not for sale."
+  buy-own-region-error: "&cYou cannot buy your own region."
+  region-bought: "&aYou have successfully bought the region '{region}'."
+  owner-region-bought: "&eYour region '{region}' has been bought."
+  rent-set: "&aRegion '{region}' is now for rent for {price} per {duration}."
+  rent-stop: "&eRegion '{region}' is no longer for rent."
+  not-for-rent: "&cThis region is not for rent."
+  already-rented: "&cThis region is already rented by player {renter}."
+  rent-success: "&aYou have successfully rented the region '{region}'."
+  rent-extended: "&aYou have extended the rent for region '{region}'."
+  renter-evicted: "&cYou have been evicted from region '{region}' for non-payment."
+  owner-renter-evicted: "&ePlayer {renter} has been evicted from your region '{region}' for non-payment."
+
+  # Flags
+  flag-set: "&aFlag '{flag}' for region '{region}' has been set to '{value}'."
+  flag-set-temp: "&aFlag '{flag}' for region '{region}' has been temporarily set to '{value}' for {duration}."
+  flag-reset: "&eFlag '{flag}' for region '{region}' has been reset to its default value."
+  invalid-flag: "&cInvalid flag."
+  invalid-flag-value: "&cInvalid value for this flag."
+  list-flag-usage: "&cUse 'add' or 'remove' for list flags."
+  flag-list-header: "&6--- Flags for region: &b{region} &6---"
+  flag-info-format: "&e{flag}: &f{value}"
+  flag-command-only: "&cThis flag type can only be changed by command."
+
+  # Subchunks
+  subchunk-flag-reset: "&aSub-chunk flags have been reset."
+  subchunk-flag-reset-specific: "&aFlag '{flag}' for the sub-chunk has been reset."
+  subchunk-flag-set-specific: "&aFlag '{flag}' for the sub-chunk has been set to '{value}'."
+  subchunk-info-header: "&6--- Sub-chunk Info [{x}, {z}] ---"
+  subchunk-info-parent: "&eParent Region: &f{region}"
+  subchunk-info-no-flags: "&7No custom flags set. Inherits all from the region."
+  subchunk-info-flags-header: "&eCustom Flags:"
+
+  # Deny messages
+  deny-break: "&cYou cannot break blocks here."
+  deny-place: "&cYou cannot place blocks here."
+  deny-interact: "&cYou cannot interact here."
+  deny-enter: "&cYou are not allowed to enter this region."
+  deny-pvp: "&cPVP is disabled in this region."
+  deny-damage-animal: "&cYou cannot harm friendly animals here."
+  deny-damage-monster: "&cYou cannot harm monsters here."
+  deny-item-drop: "&cYou cannot drop items here."
+  deny-item-pickup: "&cYou cannot pick up items here."
+  deny-vehicle-use: "&cYou cannot use vehicles here."
+  deny-vehicle-destroy: "&cYou cannot destroy vehicles here."
+  deny-flight: "&cFlight is disabled in this region."
+
+  # GUI (Graphical User Interface)
+  gui:
+    back-button: "&aBack"
+    previous-page: "&ePrevious Page"
+    next-page: "&eNext Page"
+    close-button: "&cClose"
+    page-suffix: " (Page {page})"
+    price: "&ePrice: &f{price}"
+    size: "&eSize: &f{size}"
+    chunks-suffix: " chunks"
+    owner-server: "&7Owner: &fServer"
+    role: "&eRole: &f{role}"
+    region-owner: "&7Region Owner"
+    lmb-info: "&a(LMB: Info)"
+    rmb-change-role: "&e(RMB: Change Role)"
+    duration-not-set: "not set"
+
+  # Main Menu GUI
+  main-menu:
+    title: "&1MeoRegion - Main Menu"
+    my-regions: "&aMy Regions"
+    my-regions-lore: "&7Show your regions"
+    market: "&6Region Market"
+    market-lore: "&7View regions for sale and rent"
+    settings: "&eSettings"
+    settings-lore: "&7Configure the plugin"
+    close: "&cClose"
+
+  # My Regions GUI
+  my-regions:
+    title: "&1My Regions (Page {page})"
+    no-regions: "&cYou don't have any regions."
+    create-region: "&aCreate Region"
+    create-region-lore: "&7Create a new region here"
+    region-info: "&7Size: {size} chunks"
+    status: "&eStatus: "
+    for-sale: "&aSelling for {price}"
+    for-rent: "&bRenting for {price}"
+    region-actions: "&a(LMB: Manage) &e(RMB: Info)"
+
+  # Region Management GUI
+  region-menu:
+    title: "&1Manage: {region}"
+    flags-button: "&aFlags"
+    flags-lore: "&7Manage region flags"
+    members-button: "&bMembers"
+    members-lore: "&7Manage region members"
+    economy-button: "&6Economy"
+    economy-lore: "&7Region sale and rental"
+    subchunks-button: "&dSub-chunks"
+    subchunks-lore: "&7Manage region sub-chunks"
+
+  # Flags GUI
+  flags-gui:
+    subchunk-title: "&9Sub-chunk Flags: {region}"
+    region-title: "&1Region Flags: {region}"
+    allowed: "&aAllowed"
+    denied: "&cDenied"
+    click-to-toggle: "&7(LMB: Toggle)"
+    command-only: "&c(Can only be changed by command)"
+    inherited: "&8(Inherited)"
+    reset-to-region: "&7(Shift+LMB: Reset to region)"
+    reset-to-global: "&7(Shift+LMB: Reset to global)"
+    value: "&eValue: &f{value}"
+    goto-region-flags: "&bGo to Region Flags"
+    goto-subchunk-flags: "&7Go to Sub-chunk Flags"
+    current-location-subtext: "&8(Current location)"
+
+  # Market GUI
+  market:
+    title: "&1Region Market (Page {page})"
+    buy-prompt: "&a(LMB: Buy/Rent)"
+    not-for-sale-or-rent: "&cThis region is not for sale or rent."
+
+  # Confirm GUI
+  confirm-gui:
+    title: "&4Confirm: {action}"
+    confirm: "&aConfirm"
+    confirm-action: "&7Confirm action: {action}"
+    cancel: "&cCancel"
+    cancel-operation: "&7Cancel operation"
+
+  # Economy GUI
+  economy-gui:
+    title: "&1Economy: {region}"
+    set-sale-price: "&6Set Sale Price"
+    set-sale-price-lore: "&7Sets the sale price for the region.\n&7Current price: {price}\n&a(Click to change)"
+    unsell: "&cRemove from Sale"
+    sell: "&aPut up for Sale"
+    is-for-sale: "&7The region is currently for sale."
+    is-not-for-sale: "&7The region is not currently for sale."
+    set-rent-details: "&bSet Rent Details"
+    set-rent-details-lore: "&7Sets the price and duration for renting.\n&7Current price: {price}\n&7Duration: {duration}\n&a(Click to change)"
+    unrent: "&cStop Renting"
+    rent: "&aAllow Renting"
+    toggle-lore: "&7(Click to toggle)"
+    set-sale-price-first: "&cSet a sale price first!"
+    set-rent-details-first: "&cSet a price and duration for rent first."
+
+  # Members GUI
+  members-gui:
+    title: "&1Members: {region}"
+    add-member-button: "&aAdd Member"
+    add-member-lore: "&7Add a new member to the region"
+    player-info: "&bPlayer Info for {player}:"
+    player-info-role: "&e - Role: &f{role}"
+
+  # Role Selection GUI
+  role-selection-gui:
+    title: "&1Select Role for: {player}"
+    remove-from-region: "&cRemove from Region"
+    remove-lore1: "&7The player will be completely"
+    remove-lore2: "&7removed from the member list."
+    assign-role-lore: "&7Click to assign this role."
+
+  # Settings GUI
+  settings:
+    title: "&1MeoRegion Settings"
+    language: "&bLanguage"
+    language-lore: "&7Current language: {language}"
+    lang-uk: "Ukrainian"
+    lang-en: "English"
+    grid-toggle: "&eRegion Grid"
+    grid-toggle-lore: "&7Show region borders"
+    enabled: "&aEnabled"
+    disabled: "&cDisabled"
+    preview-toggle: "&dClaim Preview"
+    preview-toggle-lore: "&7Preview the area for claiming"
+    help: "&aHelp"
+    help-lore: "&7Show all commands"
+    grid-disabled: "&eRegion grid disabled."
+    grid-enabled-specific: "&aGrid enabled for region: {region}."
+    preview-disabled: "&eClaim preview disabled."
+    preview-enabled: "&aClaim preview enabled."
+
+  # Subchunks GUI
+  subchunks:
+    title: "&1Sub-chunks: {region}"
+    current-subchunk: "&aCurrent Sub-chunk"
+    current-subchunk-lore: "&7Coordinates: {x}, {z}"
+    manage-flags: "&eManage Flags"
+    manage-flags-lore: "&7Set flags for this sub-chunk"
+    reset-flags: "&cReset Flags"
+    reset-flags-lore: "&7Reset all flags for this sub-chunk"
+    info: "&bInformation"
+    info-lore: "&7Show information about this sub-chunk"
+    subchunk-info-item: "&eSub-chunk Information"
+    set-flags-header: "&6Set Flags:"
+
+  # Chat Input
+  input:
+    set-sale-price: "&eEnter the sale price for region '{region}':"
+    set-rent-details: "&eEnter rent details for region '{region}' in format: price/time (e.g. 100/7d)"
+    set-flag-value: "&eEnter the value for flag '{flag}' in region '{region}':"
+    add-member: "&eEnter the name of the player to add to region '{region}':"
+    generic: "&eEnter a value:"
+    cancel-prompt: "&7Type 'cancel' in chat to cancel."
+    cancelled: "&aAction cancelled."
+    try-again: "&cInvalid input. Please try again or type 'cancel'."
+    unknown-type: "&cUnknown input type. Action cancelled."
+    error: "&cAn unexpected error occurred: {error}"
+    price-negative: "&cPrice cannot be negative."
+    sale-price-set: "&aSale price for region '{region}' set to: {price}"
+    invalid-price-format: "&cInvalid format. Please enter a number."
+    rent-details-format: "&cInvalid format. Use: price/time (e.g. 100.0/7d)"
+    rent-details-set: "&aRent details for region '{region}' set to: {price} per {duration}."
+    invalid-boolean: "&cInvalid format. Please enter 'true' or 'false'."
+
+  # Help Headers
+  help:
+    header-player: "&a--- MeoRegion Help (Player) ---"
+    header-economy: "&a--- Economy ---"
+    header-admin: "&c--- Admin Commands ---"
+
+  # Commercial Signs
+  commercial-signs:
+    # The text a player must write on the first line of a sign to create it.
+    # This is what the plugin looks for, so it should not have color codes.
+    for-sale-tag: "[For Sale]"
+    for-rent-tag: "[For Rent]"
+    # The text that will be displayed on the sign after it's created.
+    # This can have color codes.
+    for-sale-line-1: "&1[For Sale]"
+    for-rent-line-1: "&1[For Rent]"
+    price: "&6Price: {price}"
+    owner: "&7Owner: {owner}"
+    click-to-rent: "&7Click to rent"
+    sign-created: "&aCommercial sign successfully created."
+    sign-region-not-found: "&cThe region on this sign ('{region}') no longer exists. The sign has been removed."
+
+  # Usage messages
+  usage:
+    prefix: "&cUsage: &e"
+    claim: "/rg claim [name] - Claim a region"
+    delete: "/rg delete <name> - Delete your region"
+    info: "/rg info [name] - Get info about a region"
+    list: "/rg list [player|all] - List regions"
+    add: "/rg add <region> <nick> - Add a member"
+    remove: "/rg remove <region> <nick> - Remove a member"
+    setrole: "/rg setrole <region> <nick> <role> - Set a member's role"
+    grid: "/rg grid [name|off] - Show region borders"
+    find: "/rg find - Find nearby regions"
+    merge: "/rg merge <region1> <region2> - Merge two of your regions"
+    preview: "/rg preview - Preview claim area"
+    subchunk-flag: "/rg sch flag <flag> <value|reset> - Set a flag on a sub-chunk"
+    gui: "/rg gui <name> - Open the management GUI"
+    sell: "/rg sell <region> <price> - Put a region up for sale"
+    unsell: "/rg unsell <region> - Remove a region from sale"
+    buy: "/rg buy <region> - Buy a region"
+    rent: "/rg rent <region> <price> <time> - Put a region up for rent"
+    unrent: "/rg unrent <region> - Stop renting a region"
+    adminclaim: "/rg adminclaim <name> <radius> - Create an admin region"
+    flag: "/rg flag <region> <flag> <value> [time] - Set a flag for a region"
+    rename: "/rg rename <old_name> <new_name> - Rename a region"
+    reload: "/rg reload - Reload the plugin"

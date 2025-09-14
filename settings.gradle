@@ -1,0 +1,35 @@
+rootProject.name = 'MeoMods'
+
+// Include the common MDK test root (keeps MDK tasks available)
+include ':forge-1.12.2-mdk-test'
+project(':forge-1.12.2-mdk-test').projectDir = file('mdks/1.12.2/forge-1.12.2-mdk-test')
+
+// Include all module folders under mods/1.12.2
+include ':1.12.2:Alerts'
+project(':1.12.2:Alerts').projectDir = file('mods/1.12.2/Alerts')
+include ':1.12.2:Chat'
+project(':1.12.2:Chat').projectDir = file('mods/1.12.2/Chat')
+include ':1.12.2:ChunkGuard'
+project(':1.12.2:ChunkGuard').projectDir = file('mods/1.12.2/ChunkGuard')
+include ':1.12.2:CmdPack'
+project(':1.12.2:CmdPack').projectDir = file('mods/1.12.2/CmdPack')
+include ':1.12.2:Cosmetics'
+project(':1.12.2:Cosmetics').projectDir = file('mods/1.12.2/Cosmetics')
+include ':1.12.2:Donation'
+project(':1.12.2:Donation').projectDir = file('mods/1.12.2/Donation')
+include ':1.12.2:Market'
+project(':1.12.2:Market').projectDir = file('mods/1.12.2/Market')
+include ':1.12.2:Permissions'
+project(':1.12.2:Permissions').projectDir = file('mods/1.12.2/Permissions')
+include ':1.12.2:Tab'
+project(':1.12.2:Tab').projectDir = file('mods/1.12.2/Tab')
+include ':1.12.2:Wallet'
+project(':1.12.2:Wallet').projectDir = file('mods/1.12.2/Wallet')
+
+// Also expose the test MDK modules inside mdks/1.12.2 (Permissions/Wallet/ChunkGuard)
+include ':forge-1.12.2-mdk-test:Permissions'
+project(':forge-1.12.2-mdk-test:Permissions').projectDir = file('mdks/1.12.2/forge-1.12.2-mdk-test/Permissions')
+include ':forge-1.12.2-mdk-test:Wallet'
+project(':forge-1.12.2-mdk-test:Wallet').projectDir = file('mdks/1.12.2/forge-1.12.2-mdk-test/Wallet')
+include ':forge-1.12.2-mdk-test:ChunkGuard'
+project(':forge-1.12.2-mdk-test:ChunkGuard').projectDir = file('mdks/1.12.2/forge-1.12.2-mdk-test/ChunkGuard')

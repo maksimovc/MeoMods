@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "chunkguard",
+    "name": "ChunkGuard [MEO]",
+    "description": "Region protection mod for [MEO] servers.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["SystMEO"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

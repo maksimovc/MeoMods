@@ -1,0 +1,78 @@
+# MeoRegion v1.0.0 Configuration
+
+# Language setting
+# Supported languages: en, uk
+language: "uk"
+
+# Storage settings
+storage:
+  # Supported types: json, sqlite
+  type: "json"
+
+# Economy settings
+# Enable/disable economy features (requires Vault and an economy plugin)
+economy:
+  enabled: true
+  # How often (in seconds) to check for rental payments.
+  rental-check-interval-seconds: 60
+
+# Default settings
+defaults:
+  # Default region limit for players without specific permissions
+  default-region-limit: 1
+
+# Performance settings
+performance:
+  # Interval in minutes for autosaving regions data
+  autosave-interval-minutes: 5
+
+# Backup settings
+backups:
+  enabled: true
+  # Interval in minutes for creating backups
+  interval-minutes: 360 # 6 hours
+  # Maximum number of backup files to keep. Set to 0 to disable cleanup.
+  max-backups-to-keep: 10
+  # If true, a final backup will be performed when the server shuts down.
+  # It's recommended to keep this false to speed up server shutdown.
+  backup-on-disable: false
+
+# Changelog settings
+changelog:
+  # If true, logs administrative actions (flag changes, region sales, etc.) to changelog.log
+  enabled: true
+  # The maximum size in MB the changelog.log can reach before it's rotated.
+  # The old file will be renamed to changelog.log.old. Set to 0 to disable rotation.
+  rotate-size-mb: 5
+
+# Search settings
+search:
+  # Maximum radius in blocks for the /rg find command
+  max-radius: 100
+
+# Flag-related settings
+flags:
+  settings:
+    # Allow usage of items from mods not explicitly categorized
+    allow-mod-items: true
+    # Warn players when they try to use an item with an unknown category
+    warn-unknown-items: true
+    # Log to console when a player is blocked from using an item due to a flag
+    log-blocked-items: true
+
+  # Categorization for items from mods
+  mod-items:
+    'ic2:wrench': 'tool'
+    'ic2:jetpack': 'special'
+
+  # Pre-defined categories for vanilla items
+  item-categories:
+    weapon: 
+      - 'diamond_sword'
+      - 'bow'
+    tool:
+      - 'diamond_pickaxe'
+      - 'diamond_axe'
+    special:
+      - 'ender_pearl'
+      - 'flint_and_steel'

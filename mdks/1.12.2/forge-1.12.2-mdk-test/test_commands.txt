@@ -1,0 +1,20 @@
+op @p
+perm creategroup admin
+perm creategroup mod
+perm creategroup vip
+perm listgroups
+perm adduser Notch admin
+perm adduser Jeb_ mod
+perm adduser Dinnerbone vip
+perm listusers admin
+perm addperm admin minecraft.command.give
+perm addperm mod minecraft.command.gamemode
+perm addperm vip minecraft.command.time
+perm listperms admin
+perm createtrack staff
+perm addgroup staff vip
+perm addgroup staff mod
+perm addgroup staff admin
+perm promote Jeb_ staff
+perm listperms mod
+stop

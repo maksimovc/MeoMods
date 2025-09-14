@@ -1,0 +1,322 @@
+messages:
+  prefix: "&7[&aMeoRegion&7] "
+  player-only: "&cЦя команда лише для гравців."
+  no-permission: "&cУ вас недостатньо прав."
+  reload: "&aПлагін MeoRegion було перезавантажено."
+  economy-disabled: "&cЕкономіка на сервері вимкнена."
+  action-failed: "&cДія не вдалася."
+
+  # Region management
+  region-claimed: "&aРегіон '{region}' успішно створено."
+  admin-region-claimed: "&aАдміністративний регіон '{region}' з радіусом {radius} створено."
+  region-deleted: "&eРегіон '{region}' було видалено."
+  region-renamed: "&eРегіон '{old_name}' було перейменовано на '{new_name}'."
+  region-already-exists: "&cРегіон з назвою '{region}' вже існує."
+  area-already-claimed: "&cЦя територія або її частина вже зайнята."
+  not-in-region: "&cВи не перебуваєте в жодному регіоні."
+  not-owner: "&cВи не є власником цього регіону."
+  not-owner-or-manager: "&cВи не є власником або менеджером цього регіону."
+  region-not-found: "&cРегіон '{region}' не знайдено."
+  player-not-found: "&cГравця '{player}' не знайдено."
+  region-limit-reached: "&cВи досягли ліміту регіонів. Ваш ліміт: {limit} чанків."
+  merge-not-found: "&cОдин або обидва регіони не знайдено."
+  merge-self: "&cНеможливо об'єднати регіон з самим собою."
+  merge-success: "&aРегіони '{region1}' та '{region2}' успішно об'єднано в один."
+
+  # Info & List
+  info:
+    header: "&6--- Інформація про регіон: &b{region}&6 ---"
+    owner: "&eВласник: &f{owner}"
+    server-owner: "Сервер"
+    role-plural: "&e{role}и: &f{players}"
+    priority: "&eПріоритет: &f{priority}"
+    size-chunks: "&eРозмір (в чанках): &f{size}"
+    set-flags: "&eВстановлені прапори:"
+    flag-format: "&7 - {flag}: &f{value}"
+    status: "&eСтатус: "
+    for-sale: "&aПродається за {price}"
+    for-rent: "&bЗдається в оренду за {price}"
+  list:
+    all-header: "&6--- Список усіх регіонів ---"
+    owner-suffix: " &7(Власник: {owner})"
+    no-regions: "&eУ гравця {player} немає регіонів."
+    player-regions: "&eРегіони гравця {player}: &f{regions}"
+  find-header: "&6--- Найближчі регіони ---"
+  find-format: "&b{region} &7(Власник: {owner}, Відстань: {distance}м)"
+  find-no-regions: "&cРегіонів не знайдено в радіусі {radius} блоків."
+
+  # Roles & Permissions
+  role-set-success: "&aГравцю {player} встановлено роль '{role}' в регіоні '{region}'."
+  ownership-transferred: "&aПраво власності на регіон '{region}' передано гравцю {player}."
+  unknown-role: "&cНевідома роль. Доступні: {roles}"
+  cannot-modify-owner-role: "&cНеможливо змінити роль власника регіону."
+  cannot-set-higher-role: "&cВи не можете встановити роль, яка є вищою або рівною вашій."
+
+  # Economy
+  not-enough-money: "&cУ вас недостатньо коштів."
+  transaction-failed-withdraw: "&cНе вдалося зняти кошти. Транзакцію скасовано."
+  transaction-failed-internal: "&cСталася внутрішня помилка. Транзакцію було безпечно скасовано, а ваші гроші повернуто."
+  region-for-sale: "&aРегіон '{region}' виставлено на продаж за {price}."
+  region-not-for-sale: "&eРегіон '{region}' знято з продажу."
+  region-not-for-sale-info: "&cЦей регіон не продається."
+  buy-own-region-error: "&cВи не можете купити власний регіон."
+  region-bought: "&aВи успішно купили регіон '{region}'."
+  owner-region-bought: "&eВаш регіон '{region}' було куплено."
+  rent-set: "&aРегіон '{region}' тепер здається в оренду за {price} на {duration}."
+  rent-stop: "&eРегіон '{region}' більше не здається в оренду."
+  not-for-rent: "&cЦей регіон не здається в оренду."
+  already-rented: "&cЦей регіон вже орендований гравцем {renter}."
+  rent-success: "&aВи успішно орендували регіон '{region}'."
+  rent-extended: "&aВи продовжили оренду регіону '{region}'."
+  renter-evicted: "&cВас було виселено з регіону '{region}' через несплату."
+  owner-renter-evicted: "&eГравець {renter} був виселений з вашого регіону '{region}' через несплату."
+
+  # Flags
+  flag-set: "&aПрапор '{flag}' для регіону '{region}' встановлено на '{value}'."
+  flag-set-temp: "&aПрапор '{flag}' для регіону '{region}' тимчасово встановлено на '{value}' на {duration}."
+  flag-reset: "&eПрапор '{flag}' для регіону '{region}' скинуто до значення за замовчуванням."
+  invalid-flag: "&cНевірний прапор."
+  invalid-flag-value: "&cНевірне значення для цього прапора."
+  list-flag-usage: "&cВикористовуйте 'add' або 'remove' для спискових прапорів."
+  flag-list-header: "&6--- Прапори для регіону: &b{region} &6---"
+  flag-info-format: "&e{flag}: &f{value}"
+  flag-command-only: "&cЦей тип прапора можна змінити лише командою."
+
+  # Subchunks
+  subchunk-flag-reset: "&aПрапори суб-чанка скинуто."
+  subchunk-flag-reset-specific: "&aПрапор '{flag}' для суб-чанка скинуто."
+  subchunk-flag-set-specific: "&aПрапор '{flag}' для суб-чанка встановлено на '{value}'."
+  subchunk-info-header: "&6--- Інформація про Суб-чанк [{x}, {z}] ---"
+  subchunk-info-parent: "&eБатьківський регіон: &f{region}"
+  subchunk-info-no-flags: "&7Власні прапори не встановлено. Успадковує все від регіону."
+  subchunk-info-flags-header: "&eВласні прапори:"
+
+  # Deny messages
+  deny-break: "&cВи не можете ламати блоки тут."
+  deny-place: "&cВи не можете ставити блоки тут."
+  deny-interact: "&cВи не можете взаємодіяти тут."
+  deny-enter: "&cВам заборонено входити в цей регіон."
+  deny-pvp: "&cPVP заборонено в цьому регіоні."
+  deny-damage-animal: "&cВи не можете завдавати шкоди дружнім тваринам тут."
+  deny-damage-monster: "&cВи не можете атакувати монстрів тут."
+  deny-item-drop: "&cВи не можете викидати предмети тут."
+  deny-item-pickup: "&cВи не можете підбирати предмети тут."
+  deny-vehicle-use: "&cВи не можете використовувати транспорт тут."
+  deny-vehicle-destroy: "&cВи не можете знищувати транспорт тут."
+  deny-flight: "&cПольоти заборонені в цьому регіоні."
+
+  # GUI
+  gui:
+    back-button: "&aПовернутись"
+    previous-page: "&eПопередня сторінка"
+    next-page: "&eНаступна сторінка"
+    close-button: "&cЗакрити"
+    page-suffix: " (Стор. {page})"
+    price: "&eЦіна: &f{price}"
+    size: "&eРозмір: &f{size}"
+    chunks-suffix: " чанків"
+    owner-server: "&7Власник: &fСервер"
+    role: "&eРоль: &f{role}"
+    region-owner: "&7Власник регіону"
+    lmb-info: "&a(ЛКМ: Інформація)"
+    rmb-change-role: "&e(ПКМ: Змінити роль)"
+    duration-not-set: "не встановлено"
+
+  # Main Menu GUI
+  main-menu:
+    title: "&1MeoRegion - Головне меню"
+    my-regions: "&aМої регіони"
+    my-regions-lore: "&7Показати ваші регіони"
+    market: "&6Ринок регіонів"
+    market-lore: "&7Переглянути регіони на продаж та в оренду"
+    settings: "&eНалаштування"
+    settings-lore: "&7Налаштувати плагін"
+    close: "&cЗакрити"
+
+  # My Regions GUI
+  my-regions:
+    title: "&1Мої регіони (Стор. {page})"
+    no-regions: "&cУ вас немає регіонів."
+    create-region: "&aСтворити регіон"
+    create-region-lore: "&7Створити новий регіон тут"
+    region-info: "&7Розмір: {size} чанків"
+    status: "&eСтатус: "
+    for-sale: "&aПродається за {price}"
+    for-rent: "&bЗдається в оренду за {price}"
+    region-actions: "&a(ЛКМ: Керувати) &e(ПКМ: Інформація)"
+
+  # Region Management GUI
+  region-menu:
+    title: "&1Керування: {region}"
+    flags-button: "&aПрапори"
+    flags-lore: "&7Керувати прапорами регіону"
+    members-button: "&bУчасники"
+    members-lore: "&7Керувати учасниками регіону"
+    economy-button: "&6Економіка"
+    economy-lore: "&7Продаж та оренда регіону"
+    subchunks-button: "&dСуб-чанки"
+    subchunks-lore: "&7Керувати суб-чанками регіону"
+
+  # Flags GUI
+  flags-gui:
+    subchunk-title: "&9Прапори Суб-чанка: {region}"
+    region-title: "&1Прапори Регіону: {region}"
+    allowed: "&aДозволено"
+    denied: "&cЗаборонено"
+    click-to-toggle: "&7(ЛКМ: Перемкнути)"
+    command-only: "&c(Можна змінити лише командою)"
+    inherited: "&8(Успадковано)"
+    reset-to-region: "&7(Shift+ЛКМ: Скинути до регіону)"
+    reset-to-global: "&7(Shift+ЛКМ: Скинути до глобального)"
+    value: "&eЗначення: &f{value}"
+    goto-region-flags: "&bПерейти до прапорів Регіону"
+    goto-subchunk-flags: "&7Перейти до прапорів Суб-чанка"
+    current-location-subtext: "&8(Поточного, де ви стоїте)"
+
+  # Market GUI
+  market:
+    title: "&1Ринок регіонів (Стор. {page})"
+    buy-prompt: "&a(ЛКМ: Купити/Орендувати)"
+    not-for-sale-or-rent: "&cЦей регіон не продається і не здається в оренду."
+
+  # Confirm GUI
+  confirm-gui:
+    title: "&4Підтвердження: {action}"
+    confirm: "&aПідтвердити"
+    confirm-action: "&7Підтвердити дію: {action}"
+    cancel: "&cВідмінити"
+    cancel-operation: "&7Скасувати операцію"
+
+  # Economy GUI
+  economy-gui:
+    title: "&1Економіка: {region}"
+    set-sale-price: "&6Встановити ціну продажу"
+    set-sale-price-lore: "&7Встановлює ціну продажу регіону.\n&7Поточна ціна: {price}\n&a(Натисніть, щоб змінити)"
+    unsell: "&cЗняти з продажу"
+    sell: "&aВиставити на продаж"
+    is-for-sale: "&7Регіон зараз продається."
+    is-not-for-sale: "&7Регіон зараз не продається."
+    set-rent-details: "&bВстановити параметри оренди"
+    set-rent-details-lore: "&7Встановлює ціну та термін оренди.\n&7Поточна ціна: {price}\n&7Термін: {duration}\n&a(Натисніть, щоб змінити)"
+    unrent: "&cПрипинити оренду"
+    rent: "&aДозволити оренду"
+    toggle-lore: "&7(Натисніть, щоб перемкнути)"
+    set-sale-price-first: "&cСпочатку встановіть ціну продажу!"
+    set-rent-details-first: "&cСпочатку встановіть ціну та період оренди."
+
+  # Members GUI
+  members-gui:
+    title: "&1Учасники: {region}"
+    add-member-button: "&aДодати учасника"
+    add-member-lore: "&7Додати нового учасника до регіону"
+    player-info: "&bІнформація про гравця {player}:"
+    player-info-role: "&e - Роль: &f{role}"
+
+  # Role Selection GUI
+  role-selection-gui:
+    title: "&1Вибір ролі для: {player}"
+    remove-from-region: "&cВидалити з регіону"
+    remove-lore1: "&7Гравець буде повністю"
+    remove-lore2: "&7видалений зі списку учасників."
+    assign-role-lore: "&7Натисніть, щоб призначити цю роль."
+
+  # Settings GUI
+  settings:
+    title: "&1Налаштування MeoRegion"
+    language: "&bМова"
+    language-lore: "&7Поточна мова: {language}"
+    lang-uk: "Українська"
+    lang-en: "English"
+    grid-toggle: "&eСітка регіонів"
+    grid-toggle-lore: "&7Показувати межі регіонів"
+    enabled: "&aУвімкнено"
+    disabled: "&cВимкнено"
+    preview-toggle: "&dПопередній перегляд"
+    preview-toggle-lore: "&7Попередній перегляд території для привату"
+    help: "&aДопомога"
+    help-lore: "&7Показати всі команди"
+    grid-disabled: "&eСітку регіонів вимкнено."
+    grid-enabled-specific: "&aСітку увімкнено для регіону: {region}."
+    preview-disabled: "&eПопередній перегляд вимкнено."
+    preview-enabled: "&aПопередній перегляд увімкнено."
+
+  # Subchunks GUI
+  subchunks:
+    title: "&1Суб-чанки: {region}"
+    current-subchunk: "&aПоточний суб-чанк"
+    current-subchunk-lore: "&7Координати: {x}, {z}"
+    manage-flags: "&eКерувати прапорами"
+    manage-flags-lore: "&7Встановити прапори для цього суб-чанка"
+    reset-flags: "&cСкинути прапори"
+    reset-flags-lore: "&7Скинути всі прапори цього суб-чанка"
+    info: "&bІнформація"
+    info-lore: "&7Показати інформацію про цей суб-чанк"
+    subchunk-info-item: "&eІнформація про суб-чанк"
+    set-flags-header: "&6Встановлені прапори:"
+
+  # Chat Input
+  input:
+    set-sale-price: "&eВведіть ціну продажу для регіону '{region}':"
+    set-rent-details: "&eВведіть деталі оренди для регіону '{region}' у форматі: ціна/час (напр. 100/7d)"
+    set-flag-value: "&eВведіть значення для прапора '{flag}' в регіоні '{region}':"
+    add-member: "&eВведіть нік гравця, якого потрібно додати до регіону '{region}':"
+    generic: "&eВведіть значення:"
+    cancel-prompt: "&7Напишіть в чат 'cancel' для скасування."
+    cancelled: "&aДію скасовано."
+    try-again: "&cНевірний ввід. Спробуйте ще раз або напишіть 'cancel'."
+    unknown-type: "&cНевідомий тип вводу. Дію скасовано."
+    error: "&cСталася неочікувана помилка: {error}"
+    price-negative: "&cЦіна не може бути від'ємною."
+    sale-price-set: "&aЦіна продажу для регіону '{region}' встановлена: {price}"
+    invalid-price-format: "&cНевірний формат ціни. Введіть число."
+    rent-details-format: "&cНевірний формат. Введіть у форматі: ціна/час (наприклад: 100.0/7d)"
+    rent-details-set: "&aПараметри оренди для регіону '{region}' встановлено: {price} за {duration}."
+    invalid-boolean: "&cНевірний формат значення. Введіть 'true' або 'false'."
+
+  # Help Headers
+  help:
+    header-player: "&a--- Допомога по MeoRegion (Гравець) ---"
+    header-economy: "&a--- Економіка ---"
+    header-admin: "&c--- Команди Адміністратора ---"
+
+  # Commercial Signs
+  commercial-signs:
+    # Текст, який гравець має написати на першому рядку таблички, щоб її створити.
+    # Саме на цей текст реагує плагін, тому він не повинен містити кодів кольору.
+    for-sale-tag: "[Продаж]"
+    for-rent-tag: "[Оренда]"
+    # Текст, який буде відображатися на табличці після її створення.
+    # Тут можна використовувати коди кольорів.
+    for-sale-line-1: "&1[Продаж]"
+    for-rent-line-1: "&1[Оренда]"
+    price: "&6Ціна: {price}"
+    owner: "&7Власник: {owner}"
+    click-to-rent: "&7Клацніть для оренди"
+    sign-created: "&aКомерційну табличку успішно створено."
+    sign-region-not-found: "&cРегіон з цієї таблички ('{region}') більше не існує. Табличку було видалено."
+
+  # Usage messages
+  usage:
+    prefix: "&cВикористання: &e"
+    claim: "/rg claim [назва] - Створити регіон"
+    delete: "/rg delete <назва> - Видалити ваш регіон"
+    info: "/rg info [назва] - Інформація про регіон"
+    list: "/rg list [гравець|all] - Список регіонів"
+    add: "/rg add <регіон> <нік> - Додати учасника"
+    remove: "/rg remove <регіон> <нік> - Видалити учасника"
+    setrole: "/rg setrole <регіон> <нік> <роль> - Встановити роль"
+    grid: "/rg grid [назва|off] - Показати межі регіону"
+    find: "/rg find - Знайти найближчі регіони"
+    merge: "/rg merge <рг1> <рг2> - Об'єднати два ваших регіони"
+    preview: "/rg preview - Попередній перегляд території"
+    subchunk-flag: "/rg sch flag <прапор> <значення|reset> - Встановити прапор на суб-чанк"
+    gui: "/rg gui <назва> - Відкрити графічне меню"
+    sell: "/rg sell <регіон> <ціна> - Виставити на продаж"
+    unsell: "/rg unsell <регіон> - Зняти з продажу"
+    buy: "/rg buy <регіон> - Купити регіон"
+    rent: "/rg rent <регіон> <ціна> <час> - Виставити в оренду"
+    unrent: "/rg unrent <регіон> - Зняти з оренди"
+    adminclaim: "/rg adminclaim <назва> <радіус> - Створити адмін. регіон"
+    flag: "/rg flag <регіон> <прапор> <значення> [час] - Встановити прапор"
+    rename: "/rg rename <стара_назва> <нова_назва> - Перейменувати регіон"
+    reload: "/rg reload - Перезавантажити плагін"

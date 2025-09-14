@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Specification-Title: ChunkGuard
+Specification-Vendor: SystMEO
+Specification-Version: 1
+Implementation-Title: ChunkGuard
+Implementation-Version: 1.0
+Implementation-Vendor: SystMEO
+Implementation-Timestamp: 2025-09-14T20:53:27+0200
+

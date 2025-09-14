@@ -1,0 +1,15 @@
+[
+  {
+    "modid": "wallet",
+    "name": "Wallet [MEO]",
+    "description": "Simple economy mod for Minecraft 1.12.2.",
+    "version": "1.0.0-1.12.2",
+    "mcversion": "1.12.2",
+    "url": "https://meoworld.fun/",
+    "authorList": ["MeoWorld"],
+    "credits": "MeoWorld Team",
+    "logoFile": "",
+    "screenshots": [],
+    "parent": ""
+  }
+]
